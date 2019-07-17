@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{user.name}}'s WatchList</title>
+    <link rel="icon" href="{{ url_for('static',filename='nike.png') }}">
+    <link rel="stylesheet" href=" {{ url_for('static', filename='style.css')}}" type="text/css">
+</head>
+<body>
+{% extends 'base.html' %}
+{% block content %}
+<h3>Edit item</h3>
+<form method="post">
+    Name:<br>
+    <input type="text" name="title" autocomplete="off" required value="{{ movie.title }}"><br>
+    Year:<br>
+    <input type="text" name="year" autocomplete="off" required value="{{ movie.year }}">
+    <input class="btn" type="submit" name="submit" value="Update">
+</form>
+{% endblock %}
+</body>
+</html>
