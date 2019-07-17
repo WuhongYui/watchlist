@@ -28,11 +28,16 @@ class Movie(db.Model):
     year = db.Column(db.String(4))
 
 
+@app.context_processor
+def inject_user():
+    user = User.query.first()
+    return dict(user=user)
+
+
 @app.route('/')
 def index():
-    user = User.query.first()
     movies = Movie.query.all()
-    return render_template('index.html', user=user, movies=movies)
+    return render_template('index.html', movies=movies)
 
 @app.route('/user/<name>')
 def user_page(name):
@@ -71,3 +76,8 @@ def forge():
         db.session.add(movie)
     db.session.commit()
     click.echo('Done')
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'),404

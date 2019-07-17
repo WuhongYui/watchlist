@@ -7,19 +7,24 @@
     <link rel="stylesheet" href=" {{ url_for('static', filename='style.css')}}" type="text/css">
 </head>
 <body>
-    <h2>
-        <img alt="Miao" class="Miao" src="{{ url_for('static',filename='images/miao.png') }}">
-        {{user.name}}'s WatchList
-    </h2>
+    {% extends 'base.html' %}
+
+    {% block content %}
     <p>{{ movies|length }}Titles</p>
     <ul class="movie-list">
         {%for movie in movies%}
-        <li>{{movie.title}} - {{movie.year}}</li>
+        <li>{{movie.title}} - {{movie.year}}
+            <span class="float-right">
+                <a class="imdb" href="https://www.imdb.com/find?q={{ movie.title }}" target="_blank" title="Find this movie on IMDb">IMDb</a>
+            </span>
         {% endfor %}
+        </li>
     </ul>
+        <img alt="Totoro" class="Totoro" src="{{ url_for('static',filename='images/totoro.gif')}}">
+    {% endblock %}
     <footer>
         <img alt="Totoro" class="Totoro" src="{{ url_for('static',filename='images/totoro.gif')}}">
-        <small>&copy;2018 <a href="http://helloflask.com/tutorial">Hello Flask</a></small>
+        <small>&copy;2019 <a href="http://helloflask.com/tutorial">HelloFlask</a></small>
     </footer>
 </body>
 </html>
