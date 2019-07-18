@@ -81,9 +81,7 @@ def login():
             flash('登录成功')
             return redirect(url_for('index'))
 
-        flash('用户名或密码错误')
         return redirect(url_for('login'))
-
     return render_template('login.html')
 
 
@@ -113,7 +111,7 @@ def edit(movie_id):
     if request.method == 'POST':
         title = request.form.get('title')
         year = request.form.get('year')
-        if not title or not year or len(year)>4 or len(title)>60:
+        if not title or not year or len(year)>10 or len(title)>70:
             flash('无效输入')
             return redirect(url_for('edit',movie_id=movie_id))
         movie.title = title
@@ -208,6 +206,7 @@ click.echo('Initialized database.')
 def page_not_found(e):
     return render_template('404.html'),404
 
+
 @app.route('/settings', methods=['GET', 'POST'])
 @login_required
 def settings():
@@ -216,7 +215,10 @@ def settings():
         if not name or len(name)>20:
             flash('无效输入')
             return redirect(url_for('settings'))
-        current_user.name = name
+        user = User.query.first()
+        user.name = name
         db.session.commit()
+        flash('Settings updated.')
         return redirect(url_for('index'))
+
     return render_template(url_for('settings.html'))

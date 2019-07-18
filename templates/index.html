@@ -24,7 +24,7 @@
         {%for movie in movies%}
         <li>{{movie.title}} - {{movie.year}}
             <span class="float-right">
-                <a class="imdb" href="https://movie.douban.com/subject_search?search_text={{ movie.title }}" target="_blank" title="Find this movie on IMDb">豆瓣</a>
+                <a class="imdb" href="https://movie.douban.com/subject_search?search_text={{ movie.title }}" target="_blank" title="Find this movie on Douban">豆瓣</a>
             </span>
             <span class="float-right">
                 {% if current_user.is_authenticated %}
